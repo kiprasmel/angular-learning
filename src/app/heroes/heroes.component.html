@@ -4,8 +4,20 @@
 			<span class="badge">{{ hero.id }}</span>
 			{{ hero.name }}
 		</a>
+		<button (click)="deleteHero(hero.id)" class="delete" title="delete hero">&#10007;</button>
+		<!-- &cross; -->
+		<!-- /\ parsing errors huh? -->
 	</li>
 </ul>
+
+<div>
+	<label>
+		Hero name:
+		<input type="text" #heroName />
+	</label>
+
+	<button (click)="createNewHero(heroName.value); heroName.value = ''">Create new Hero!</button>
+</div>
 
 <!-- <div *ngIf="selectedHero">
 	<h2>{{ selectedHero.name | uppercase }} details</h2>
