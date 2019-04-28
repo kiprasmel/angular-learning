@@ -1,0 +1,25 @@
+<div id="hero-search-improved">
+	<h4>Improved hero search&trade;</h4>
+
+	<input type="text" #searchBox (input)="search(searchBox.value)" />
+
+	<label>
+		Show all when empty
+		<input
+			type="checkbox"
+			name="show-all"
+			id=""
+			#showAllHeroesWhenEmptyRef
+			[(ngModel)]="showAllHeroesWhenEmpty"
+			(change)="updateShowAll(showAllHeroesWhenEmptyRef.checked, searchBox.value)"
+		/>
+	</label>
+
+	<ul class="search-results">
+		<li *ngFor="let hero of foundHeroes">
+			<a routerLink="/heroes/{{ hero.id }}">
+				{{ hero.name }}
+			</a>
+		</li>
+	</ul>
+</div>
