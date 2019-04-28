@@ -11,10 +11,18 @@ import { isNumber, isString } from "util";
 export class DashboardComponent implements OnInit {
 	originalHeroes: Hero[];
 	shownHeroes: Hero[];
-	@Input() howManyHeroes: number = this.getHowManyHeroes();
+	@Input() howManyHeroes: number;
+	private howManyHeroesKeyInLS = "howManyHeroesStr";
 
-	getHowManyHeroes(): number {
-		let howManyHeroesStr: string = localStorage.getItem("howManyHeroesStr");
+	constructor(private heroService: HeroService) {}
+
+	ngOnInit() {
+		this.howManyHeroes = this.getHowManyHeroes();
+		this.getHeroes();
+	}
+
+	getHowManyHeroes() {
+		let howManyHeroesStr: string = localStorage.getItem(this.howManyHeroesKeyInLS);
 
 		/** default case, if the localStorage method didn't get anything */
 		if (howManyHeroesStr === null || !isString(howManyHeroesStr) || howManyHeroesStr === "") {
@@ -24,26 +32,19 @@ export class DashboardComponent implements OnInit {
 		return Number(howManyHeroesStr);
 	}
 
-	constructor(private heroService: HeroService) {}
-
-	ngOnInit() {
-		this.getHeroes();
-	}
-
 	getHeroes(): void {
 		this.heroService.getHeroes().subscribe((heroes) => {
 			this.originalHeroes = heroes;
-			// this.originalHeroes = []; // testing
 			this.updateHowManyHeroesAreShowed();
 		});
 	}
 
 	updateHowManyHeroesAreShowed(): void {
-		console.log("Update Heroes", this.howManyHeroes);
-
-		if (isNumber(this.howManyHeroes)) {
-			this.shownHeroes = this.originalHeroes.slice(0, this.howManyHeroes);
-			localStorage.setItem("howManyHeroes", this.howManyHeroes.toString());
+		if (!isNumber(this.howManyHeroes)) {
+			return;
 		}
+
+		this.shownHeroes = this.originalHeroes.slice(0, this.howManyHeroes);
+		localStorage.setItem(this.howManyHeroesKeyInLS, this.howManyHeroes.toString());
 	}
 }
