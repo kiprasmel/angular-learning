@@ -12,7 +12,11 @@
 </h3>
 
 <ng-container
-	*ngIf="shownHeroes.length; then heroesAvailableTemplate; else noHeroesAvailableTemplate"
+	*ngIf="
+		shownHeroes && shownHeroes.length;
+		then heroesAvailableTemplate;
+		else noHeroesAvailableTemplate
+	"
 ></ng-container>
 
 <ng-template #heroesAvailableTemplate>
@@ -26,13 +30,13 @@
 </ng-template>
 
 <ng-template #noHeroesAvailableTemplate>
-	<h1 *ngIf="!originalHeroes.length; else noHeroesSelectedTemplate">0 heroes available :s</h1>
-</ng-template>
-
-<ng-template #noHeroesSelectedTemplate>
-	<h1 *ngIf="!shownHeroes.length; else noHeroesAvailableTemplate">You selected 0 heroes :s</h1>
-</ng-template>
-
-<ng-template #errorTemplate>
-	<h1>Something went wrong!</h1>
+	<h1>
+		{{
+			!originalHeroes.length
+				? "0 heroes available"
+				: !shownHeroes.length
+				? "You selected 0 heroes :s"
+				: "Something went wrong!"
+		}}
+	</h1>
 </ng-template>
