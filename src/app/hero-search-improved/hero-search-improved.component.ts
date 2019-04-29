@@ -26,8 +26,6 @@ export class HeroSearchImprovedComponent implements OnInit, OnChanges {
 
 	//Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
 	ngOnChanges(changes: SimpleChanges): void {
-		console.log("changes", changes);
-
 		/**
 		 * check if we received the `heroes` props and then update the search list
 		 */
