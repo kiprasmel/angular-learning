@@ -1,4 +1,36 @@
-# AngularTutorialRoutingScss
+# Angular Tutorial + more!
+
+This is the [angular tutorial](https://angular.io/tutorial) I completed to learn the basics of angular.
+
+Currently, it's got everything the original tutorial has, **plus**
+
+* an improved search using native JavaScript features
+
+	Instead of making a request every time the searching string is updated,
+	it uses the already received `heroes` array, applies the `.filter` function and returns the matching heroes.
+
+	This would be problematic if we had a huge array of heroes, because we'd need to fetch them ALL and that's no good.
+	Also, filtering would take way longer than the server's filtering method.
+
+	But in this case, the `heroes` array is small and we already have all of them fetched from the start,
+	so why not use that instead? 😎
+
+* a selection of *how many* top heroes to show
+
+	It's really quite simple - by default, the top `4` heroes are displayed.
+	But the user can change that to any value in range [`0`; `heroes.length`]
+
+	The selection also gets saved to the `localStorage`,
+	so that it's remembered even after a page refresh
+
+* an [automatic build script](./build-gh-pages.sh) for [github pages](https://sarpik.github.io/angular-learning)
+
+	nothing much to it - just a couple of commands
+	crunched together to make the build process seamless
+
+* other little bits & peaces
+
+---
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.8.
 
