@@ -6,17 +6,13 @@
 		[(ngModel)]="howManyHeroes"
 		(ngModelChange)="updateHowManyHeroesAreShowed()"
 		[min]="0"
-		[max]="originalHeroes.length"
+		[max]="originalHeroes?.length"
 	/>
 	Heroes
 </h3>
 
 <ng-container
-	*ngIf="
-		shownHeroes && shownHeroes.length;
-		then heroesAvailableTemplate;
-		else noHeroesAvailableTemplate
-	"
+	*ngIf="shownHeroes?.length; then heroesAvailableTemplate; else noHeroesAvailableTemplate"
 ></ng-container>
 
 <ng-template #heroesAvailableTemplate>
@@ -32,7 +28,7 @@
 <ng-template #noHeroesAvailableTemplate>
 	<h1>
 		{{
-			!originalHeroes.length
+			!originalHeroes?.length
 				? "0 heroes available"
 				: !shownHeroes.length
 				? "You selected 0 heroes :s"
