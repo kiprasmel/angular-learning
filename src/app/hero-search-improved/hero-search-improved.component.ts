@@ -18,9 +18,9 @@ export class HeroSearchImprovedComponent implements OnInit, OnChanges {
 	constructor() {}
 
 	ngOnInit() {
-		// if unset (first time), then set default to "true"
+		// if unset (first time), then set default to "false"
 		const showAllHeroesWhenEmptyStr =
-			localStorage.getItem(this.showAllHeroesWhenEmptyKeyInLS) || "true";
+			localStorage.getItem(this.showAllHeroesWhenEmptyKeyInLS) || "false";
 		this.showAllHeroesWhenEmpty = showAllHeroesWhenEmptyStr === "true";
 	}
 
