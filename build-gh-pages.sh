@@ -1,20 +1,13 @@
 #!/bin/sh
 # build-gh-pages.sh
-# use `-m <message>` to provide a custom commit message
 
-! $(command -v npx >/dev/null 2>&1) && printf "Error! 'npx' not found. \nPlease install it. Exiting\n" && exit 1
+project_name="angular-learning"
+git_repo_url="https://sarpik.github.io/angular-learning/"
 
-while getopts ":m:" option; do
-	case "${option}" in
-		m)
-			commit_message="${OPTARG}"
-	esac
-done
-
-# default case
-[ -z "$commit_message" ] && commit_message="Updating build for gh-pages"
+! $(command -v ng >/dev/null 2>&1) && printf "Error! 'ng' not found. \nInstall it using 'npm i -g @angular/cli'\nExiting\n" && exit 1
+! $(command -v npx >/dev/null 2>&1) && printf "Error! 'npx' not found. \nInstall it by installing NodeJS.\nExiting\n" && exit 1
 
 # build & publish
-ng build --prod --output-path docs --base-href "https://sarpik.github.io/angular-learning/"
+ng build --prod --output-path dist/"$project_name" --base-href "$git_repo_url"
 
-npx angular-cli-ghpages --dir=docs --message "$commit_message"
+npx angular-cli-ghpages --dir=dist/"$project_name" "$@"
