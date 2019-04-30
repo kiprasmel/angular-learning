@@ -67,6 +67,15 @@ h4 {
 	cursor: pointer;
 }
 
+.hero-searching {
+	display: flex;
+
+	/* all children: */
+	& > * {
+		margin: 2em 2em 2em 0;
+	}
+}
+
 @media (max-width: 600px) {
 	.module {
 		font-size: 10px;
