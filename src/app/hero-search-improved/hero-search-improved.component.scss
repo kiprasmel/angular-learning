@@ -1,5 +1,54 @@
+$borderColor: #607d8b; //#f86464;
+
 #search-box {
 	width: 192px;
-	font-size: 1.5em;
 	padding: 0.5em;
+
+	font-size: 1.5em;
+
+	border: 1px solid $borderColor;
+
+	// // border: 0.25px solid #a9a9a9;
+	// border-bottom: 1px solid $borderColor;
+	// border-style: inset;
+	// border-image: initial;
+	// box-shadow: none;
+	// text-shadow: none;
+}
+
+ul.search-results {
+	margin: 0;
+	padding: 0;
+
+	color: $borderColor;
+	font-weight: 500;
+
+	li.result {
+		/**
+		 * select first 3 elements
+		 * https://css-tricks.com/useful-nth-child-recipies/
+		 */
+		&:nth-child(-n + 3) {
+			font-weight: 600;
+		}
+
+		width: 208px;
+		height: 16px;
+		padding: 10px 4px;
+
+		list-style: none;
+		border-top: none;
+		border-bottom: 1px solid #888;
+		border-right: 1px solid $borderColor;
+		border-left: 1px solid $borderColor;
+
+		cursor: pointer;
+
+		&:first-child {
+			// border-top: 2px solid $borderColor;
+		}
+		&:last-child {
+			border-bottom: 1px solid $borderColor;
+		}
+	}
 }
