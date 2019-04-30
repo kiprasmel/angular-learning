@@ -46,9 +46,19 @@ export class HeroSearchImprovedComponent implements OnInit, OnChanges {
 		this.foundHeroes = this.heroes.filter((hero) => termMatchingRegex.test(hero.name));
 	}
 
-	updateShowAll(showAll: boolean, term: string): void {
+	updateShowAll(showAll: boolean, term: string, scrollToTargetRef?: HTMLElement): void {
 		this.showAllHeroesWhenEmpty = showAll;
 		localStorage.setItem(this.showAllHeroesWhenEmptyKeyInLS, showAll.toString());
 		this.search(term);
+
+		// if (showAll === true && scrollToTargetRef) {
+		// TODO - implement a scroll-down operation
+		// 	// scrollToTargetRef.scrollIntoView({ behavior: "smooth" });
+		// 	window.scrollTo({ behavior: "smooth", top: scrollToTargetRef.offsetTop });
+		// 	console.log(
+		// 		"TCL: HeroSearchImprovedComponent -> constructor -> scrollToTargetRef",
+		// 		scrollToTargetRef.offsetTop
+		// 	);
+		// }
 	}
 }
