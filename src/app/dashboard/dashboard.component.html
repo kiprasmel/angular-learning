@@ -1,44 +1,45 @@
 <div>
+	<h3 class="top-x-heroes">
+		Top
+		<input
+			id="howManyHeroesSelector"
+			type="number"
+			[(ngModel)]="howManyHeroes"
+			(ngModelChange)="updateHowManyHeroesAreShowed()"
+			[min]="0"
+			[max]="originalHeroes?.length"
+		/>
+		Heroes
+	</h3>
 
-<h3 class="top-x-heroes">
-	Top
-	<input
-		id="howManyHeroesSelector"
-		type="number"
-		[(ngModel)]="howManyHeroes"
-		(ngModelChange)="updateHowManyHeroesAreShowed()"
-		[min]="0"
-		[max]="originalHeroes?.length"
-	/>
-	Heroes
-</h3>
+	<ng-container
+		*ngIf="shownHeroes?.length; then heroesAvailableTemplate; else noHeroesAvailableTemplate"
+	></ng-container>
 
-<ng-container
-	*ngIf="shownHeroes?.length; then heroesAvailableTemplate; else noHeroesAvailableTemplate"
-></ng-container>
+	<ng-template #heroesAvailableTemplate>
+		<div class="grid grid-pad">
+			<a *ngFor="let hero of shownHeroes" class="col-1-4" routerLink="/heroes/{{ hero.id }}">
+				<div class="module hero">
+					<h4>{{ hero.name }}</h4>
+				</div>
+			</a>
+		</div>
+	</ng-template>
 
-<ng-template #heroesAvailableTemplate>
-	<div class="grid grid-pad">
-		<a *ngFor="let hero of shownHeroes" class="col-1-4" routerLink="/heroes/{{ hero.id }}">
-			<div class="module hero">
-				<h4>{{ hero.name }}</h4>
-			</div>
-		</a>
+	<ng-template #noHeroesAvailableTemplate>
+		<h1>
+			{{
+				!originalHeroes?.length
+					? "0 heroes available"
+					: !shownHeroes.length
+					? "You selected 0 heroes :s"
+					: "Something went wrong!"
+			}}
+		</h1>
+	</ng-template>
+
+	<div class="hero-searching">
+		<app-hero-search></app-hero-search>
+		<app-hero-search-improved [heroes]="originalHeroes"></app-hero-search-improved>
 	</div>
-</ng-template>
-
-<ng-template #noHeroesAvailableTemplate>
-	<h1>
-		{{
-			!originalHeroes?.length
-				? "0 heroes available"
-				: !shownHeroes.length
-				? "You selected 0 heroes :s"
-				: "Something went wrong!"
-		}}
-	</h1>
-</ng-template>
-
-
-<app-hero-search></app-hero-search>
-<app-hero-search-improved [heroes]="originalHeroes"></app-hero-search-improved>
+</div>
