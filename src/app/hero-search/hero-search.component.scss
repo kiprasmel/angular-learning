@@ -1,4 +1,10 @@
 /* HeroSearch private styles */
+#search-box {
+	width: 192px;
+	font-size: 1.5em;
+	padding: 0.5em;
+}
+
 .search-result li {
 	border-bottom: 1px solid gray;
 	border-left: 1px solid gray;
@@ -26,10 +32,6 @@
 }
 .search-result li a:active {
 	color: white;
-}
-#search-box {
-	width: 200px;
-	height: 20px;
 }
 
 ul.search-result {
