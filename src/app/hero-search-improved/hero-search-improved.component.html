@@ -8,7 +8,6 @@
 		<input
 			type="checkbox"
 			name="show-all"
-			id=""
 			#showAllHeroesWhenEmptyRef
 			[(ngModel)]="showAllHeroesWhenEmpty"
 			(change)="
@@ -17,11 +16,9 @@
 		/>
 	</label>
 
-	<ul class="search-results">
-		<li *ngFor="let hero of foundHeroes">
-			<a routerLink="/heroes/{{ hero.id }}">
-				{{ hero.name }}
-			</a>
+	<ul class="search-results" *ngIf="foundHeroes?.length">
+		<li class="result" *ngFor="let hero of foundHeroes" routerLink="/heroes/{{ hero.id }}">
+			{{ hero.name }}
 		</li>
 	</ul>
 </div>
